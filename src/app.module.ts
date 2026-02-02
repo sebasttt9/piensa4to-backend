@@ -7,6 +7,7 @@ import { DatasetsModule } from './datasets/datasets.module';
 import { DashboardsModule } from './dashboards/dashboards.module';
 import { SharedModule } from './common/shared.module';
 import { AppController } from './app.controller';
+import { StatusController } from './status/status.controller';
 import { AppService } from './app.service';
 import { SupabaseModule } from './database/supabase.module';
 import { AnalyticsModule } from './analytics/analytics.module';
@@ -32,7 +33,7 @@ import { SuperadminDashboardModule } from './superadmin-dashboard/superadmin-das
     CommerceModule,
     SuperadminDashboardModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, StatusController],
   providers: [AppService],
 })
 export class AppModule { }

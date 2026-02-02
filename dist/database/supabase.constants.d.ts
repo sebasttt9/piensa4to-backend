@@ -1,0 +1,2 @@
+export declare const SUPABASE_CLIENT = "SUPABASE_CLIENT";
+export declare const SUPABASE_DATA_CLIENT = "SUPABASE_DATA_CLIENT";

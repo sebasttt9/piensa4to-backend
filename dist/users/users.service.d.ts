@@ -1,0 +1,30 @@
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { UserEntity } from './entities/user.entity';
+import { UpdateProfileDto } from './dto/update-profile.dto';
+import { AssignOrganizationDto } from './dto/assign-organization.dto';
+export declare class UsersService {
+    private readonly supabase;
+    private readonly supabaseData;
+    constructor(supabase: SupabaseClient, supabaseData: SupabaseClient);
+    private readonly tableName;
+    create(createUserDto: CreateUserDto): Promise<UserEntity>;
+    findAll(): Promise<Array<Omit<UserEntity, 'passwordHash'>>>;
+    findById(id: string): Promise<Omit<UserEntity, 'passwordHash'>>;
+    findByEmail(email: string): Promise<UserEntity | null>;
+    update(id: string, changes: UpdateUserDto): Promise<Omit<UserEntity, 'passwordHash'>>;
+    assignOrganization(id: string, dto: AssignOrganizationDto): Promise<Omit<UserEntity, 'passwordHash'>>;
+    updateProfile(id: string, changes: UpdateProfileDto): Promise<Omit<UserEntity, 'passwordHash'>>;
+    removeOrganization(id: string): Promise<Omit<UserEntity, 'passwordHash'>>;
+    changePassword(id: string, currentPassword: string, newPassword: string): Promise<void>;
+    remove(id: string): Promise<void>;
+    private cleanupUserRelations;
+    private cleanupClientRelations;
+    private collectIds;
+    private executeCleanup;
+    private isIgnorableCleanupError;
+    private resolveUserDeleteError;
+    private toPublicUser;
+    private toUserEntity;
+}

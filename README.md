@@ -1,3 +1,4 @@
+\n+chore: trigger Vercel redeploy
 ## DataPulse API (NestJS)
 
 Backend de la plataforma **DataPulse**. Expone un API REST modular para autenticación, gestión de datasets, dashboards inteligentes y análisis automático de archivos CSV/XLSX.

@@ -15,15 +15,15 @@ export class UserSyncService {
         private readonly dataSupabase: SupabaseClient,
     ) {
         // Crear un cliente de servicio que bypass RLS
-        this.dataServiceClient = createClient(
-            process.env.SUPABASE_DATA_URL || 'https://nqkodrksdcmzhxoeuidj.supabase.co',
-            process.env.SUPABASE_DATA_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5xa29kcmtzZGNtemh4b2V1aWRqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NjkxMjc4MTksImV4cCI6MjA4NDcwMzgxOX0.NTQzDrNuNxqbtPzTNBoCjW3UrNTvtBl_apl9xrYcmVQ',
-            {
-                auth: {
-                    persistSession: false,
-                },
-            }
-        );
+        const dataUrl = process.env.SUPABASE_DATA_URL;
+        const serviceRoleKey = process.env.SUPABASE_DATA_SERVICE_ROLE_KEY;
+        if (!dataUrl || !serviceRoleKey) {
+            this.logger.error('SUPABASE_DATA_URL o SUPABASE_DATA_SERVICE_ROLE_KEY no están configuradas.');
+            throw new Error('Faltan variables de entorno para cliente de servicio de Supabase');
+        }
+        this.dataServiceClient = createClient(dataUrl, serviceRoleKey, {
+            auth: { persistSession: false },
+        });
     }
 
     /**
